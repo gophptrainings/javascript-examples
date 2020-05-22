@@ -1,0 +1,107 @@
+<html>
+	<head>
+		<title>JavaScript Date Object</title>
+	</head>
+	<body>
+		<h1>Stopwatch</h1>
+		<div class="stopwatch">
+			<h1>
+				<span id="hours">00</span>:
+				<span id="minutes">00</span>:
+				<span id="seconds">00</span>:
+				<span id="millisec">00</span>
+			</h1>
+		</div>
+		
+		<button id="start" onclick="startStop()">Start</button>
+		<button onclick="reset()">Reset</button>
+		
+		
+		<script>
+			var millisec = 0;
+			var sec = 0; 
+			var min = 0;
+			var hour = 0;
+			var ss = 0;
+			var x;
+			function startStop()
+			{
+				ss = ss+1;
+				if(ss == 1)
+				{
+					start();
+					document.getElementById("start").innerHTML = "Stop";
+				}
+				else
+				{
+					ss = 0;
+					document.getElementById("start").innerHTML = "Start";
+					stop();
+				}
+				
+			}
+			function stop()
+			{
+				clearInterval(x);
+			}
+			function start()
+			{
+				x = setInterval(timer,10);
+			}
+			
+			function timer()
+			{
+				milliOut = 0;
+				secOut = 0;
+				minOut = 0;
+				hourOut = 0;
+			
+				milliOut = checkTimer(millisec);
+				secOut = checkTimer(sec);
+				minOut = checkTimer(min);
+				hourOut = checkTimer(hour);
+			
+				millisec = ++millisec;
+				if(millisec == 100)
+				{
+					millisec = 0;
+					sec = ++sec;
+				}
+				if(sec == 60)
+				{
+					sec = 0;
+					min = ++min
+				}
+				if(min == 60)
+				{
+					min = 0;
+					hour = ++hour;
+				}
+				document.getElementById("millisec").innerHTML = milliOut;
+				document.getElementById("seconds").innerHTML = secOut;
+				document.getElementById("minutes").innerHTML = minOut;
+				document.getElementById("hours").innerHTML = hourOut;
+			}
+			function checkTimer(i)
+			{
+				if(i < 10)
+				{
+					return "0"+i;
+				}
+				return i;
+			}
+			function reset()
+			{
+				millisec = 0;
+				min = 0;
+				sec = 0;
+				hour = 0;
+				document.getElementById("millisec").innerHTML = "00";
+				document.getElementById("seconds").innerHTML = "00";
+				document.getElementById("minutes").innerHTML = "00";
+				document.getElementById("hours").innerHTML = "00";
+			}
+		</script>
+	</body>
+</html>
+
